@@ -2,16 +2,20 @@ const Order = require("../models/Order");
 const Product = require("../models/Product");
 const { convertToISO } = require("../utils/helper/helperFunctions");
 const { v4: uuidv4 } = require("uuid");
-const redisClient = require("../utils/redis/redisClient");
+const redisClient = require("../utils/redis/redisClient").getClient();
 
 const getSalesAnalytics = async (startDate, endDate) => {
   const cacheKey = `salesAnalytics:${startDate}:${endDate}`;
 
-  let getCachedValue = await redisClient.get(cacheKey);
+  let getCachedValue = null;
 
-  if (getCachedValue) {
-    console.log("Getting from Redis - " + cacheKey);
-    return JSON.parse(getCachedValue);
+  if (redisClient) {
+    try {
+      getCachedValue = await redisClient.get(cacheKey);
+      return JSON.parse(getCachedValue);
+    } catch (error) {
+      console.error("Redis GET error:", error);
+    }
   }
 
   const salesAnalytics = await Order.aggregate([
@@ -74,9 +78,15 @@ const getSalesAnalytics = async (startDate, endDate) => {
       },
     },
   ]);
-  if (salesAnalytics.length > 0) {
-    await redisClient.setEx(cacheKey, 600, JSON.stringify(salesAnalytics[0]));
-    console.log("Saving to Redis - " + cacheKey);
+  if (salesAnalytics.length > 0 && redisClient) {
+    try {
+      await redisClient.setEx(cacheKey, 600, JSON.stringify(salesAnalytics[0]));
+      console.log("Saving to Redis - " + cacheKey);
+    } catch (error) {
+      console.error("Redis GET error:", error);
+    }
+  }else{
+    console.log("⚠️ Not saving to Redis - Redis might be down")
   }
 
   return salesAnalytics.length > 0 ? salesAnalytics[0] : null;
