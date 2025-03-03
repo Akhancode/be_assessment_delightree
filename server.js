@@ -4,11 +4,8 @@ const { graphqlHTTP } = require("express-graphql");
 const connectDB = require("./config/db");
 const errorHandler = require("./src/middewares/errorHandler");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
-const typeDefs = require("./src/graphql/typeDefs");
-const resolvers = require("./src/graphql/resolvers");
-const Product = require("./src/models/Product");
-const { addProduct } = require("./src/services/getCustomerSpending");
-const Customer = require("./src/models/Customer");
+const typeDefs = require("./src/graphql/typeDefs/index");
+const resolvers = require("./src/graphql/resolvers/index");
 
 const app = express();
 connectDB();
