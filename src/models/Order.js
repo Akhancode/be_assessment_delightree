@@ -27,4 +27,9 @@ const OrderSchema = new mongoose.Schema({
   },
 });
 
+OrderSchema.index({ customerId: 1 });
+OrderSchema.index({ orderDate: 1, status: 1 });
+OrderSchema.index({ "products.productId": 1 });
+
+
 module.exports = mongoose.model("Order", OrderSchema);

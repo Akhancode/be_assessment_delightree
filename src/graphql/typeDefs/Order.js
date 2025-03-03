@@ -15,11 +15,21 @@ const orderTypeDefs = gql`
     status: String!
   }
 
+  type CategoryBreakUp {
+    category: String!
+    revenue: Float!
+  }
+
+  type SalesAnalytics {
+    totalRevenue: Float!
+    completedOrders: Int!
+    categoryBreakdown: [CategoryBreakUp]
+  }
 
   extend type Query {
     getAllOrders: [Order]
     getOrderById(_id: ID!): Order
-
+    getSalesAnalytics(startDate: String!, endDate: String!): SalesAnalytics
   }
 `;
 

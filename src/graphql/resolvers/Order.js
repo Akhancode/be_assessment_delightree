@@ -1,4 +1,5 @@
 const Order = require("../../models/Order"); // MongoDB Model
+const { getSalesAnalytics } = require("../../services/order.service");
 
 const orderResolvers = {
   Query: {
@@ -7,6 +8,9 @@ const orderResolvers = {
     },
     getOrderById: async (_, { _id }) => {
       return await Order.findById(_id);
+    },
+    getSalesAnalytics: async (_, { startDate, endDate }) => {
+      return await getSalesAnalytics(startDate, endDate);
     },
   },
 };
