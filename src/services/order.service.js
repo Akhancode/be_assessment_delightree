@@ -2,8 +2,18 @@ const Order = require("../models/Order");
 const Product = require("../models/Product");
 const { convertToISO } = require("../utils/helper/helperFunctions");
 const { v4: uuidv4 } = require("uuid");
+const redisClient = require("../utils/redis/redisClient");
 
 const getSalesAnalytics = async (startDate, endDate) => {
+  const cacheKey = `salesAnalytics:${startDate}:${endDate}`;
+
+  let getCachedValue = await redisClient.get(cacheKey);
+
+  if (getCachedValue) {
+    console.log("Getting from Redis - " + cacheKey);
+    return JSON.parse(getCachedValue);
+  }
+
   const salesAnalytics = await Order.aggregate([
     {
       $match: {
@@ -64,6 +74,11 @@ const getSalesAnalytics = async (startDate, endDate) => {
       },
     },
   ]);
+  if (salesAnalytics.length > 0) {
+    await redisClient.setEx(cacheKey, 600, JSON.stringify(salesAnalytics[0]));
+    console.log("Saving to Redis - " + cacheKey);
+  }
+
   return salesAnalytics.length > 0 ? salesAnalytics[0] : null;
 };
 const createNewOrder = async (input) => {
