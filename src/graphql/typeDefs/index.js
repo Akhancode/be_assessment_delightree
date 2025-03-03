@@ -5,6 +5,7 @@ const productTypeDefs = require("./Product");
 
 const baseTypeDefs = gql`
   type Query
+  type Mutation
 `;
 
 module.exports = [

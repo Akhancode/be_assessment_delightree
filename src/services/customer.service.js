@@ -39,23 +39,6 @@ async function getCustomerSpending(customerId) {
   }
 }
 
-const addProduct = async (name, category, price, stock) => {
-  try {
-    const newProduct = new Product({
-      _id: new mongoose.Types.ObjectId(),
-      name,
-      category,
-      price,
-      stock,
-    });
 
-    const savedProduct = await newProduct.save();
-    console.log("✅ Product Added:", savedProduct);
-    return savedProduct;
-  } catch (error) {
-    console.error("❌ Error adding product:", error);
-    throw error;
-  }
-};
 
-module.exports = { getCustomerSpending, addProduct };
+module.exports = { getCustomerSpending };

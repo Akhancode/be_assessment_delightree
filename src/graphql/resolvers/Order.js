@@ -1,5 +1,6 @@
 const Order = require("../../models/Order"); // MongoDB Model
-const { getSalesAnalytics } = require("../../services/order.service");
+const { getSalesAnalytics, createNewOrder } = require("../../services/order.service");
+const { v4: uuidv4 } = require("uuid");
 
 const orderResolvers = {
   Query: {
@@ -11,6 +12,11 @@ const orderResolvers = {
     },
     getSalesAnalytics: async (_, { startDate, endDate }) => {
       return await getSalesAnalytics(startDate, endDate);
+    },
+  },
+  Mutation: {
+    async placeOrder(_, { input }) {
+        return await createNewOrder(input)
     },
   },
 };

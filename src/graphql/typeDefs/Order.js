@@ -26,6 +26,20 @@ const orderTypeDefs = gql`
     categoryBreakdown: [CategoryBreakUp]
   }
 
+  input ProductOrderInput {
+    productId: String!
+    quantity: Int!
+  }
+
+  input PlaceOrderInput {
+    customerId: String!
+    products: [ProductOrderInput]!
+  }
+
+  extend type Mutation {
+    placeOrder(input: PlaceOrderInput!): Order
+  }
+
   extend type Query {
     getAllOrders: [Order]
     getOrderById(_id: ID!): Order

@@ -8,4 +8,9 @@ module.exports = {
     ...orderResolvers.Query,
     ...productResolvers.Query,
   },
+  Mutation: {
+    ...orderResolvers.Mutation,
+    ...customerResolvers?.Mutation,
+    ...productResolvers?.Mutation,
+  },
 };
