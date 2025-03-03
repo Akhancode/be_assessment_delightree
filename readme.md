@@ -29,6 +29,13 @@ This project is a GraphQL API for an e-commerce platform to analyze revenue, cus
 - ✅ **Optimized MongoDB Aggregation Queries**
 - ✅ **Used Redis Caching for `getSalesAnalytics`**
 - ✅ **Implemented `getAllProducts` Query**
+- ✅ **Implemented extra queries to fetch:**
+  - `getAllCustomers`
+  - `getCustomerById`
+  - `getAllOrders`
+  - `getOrderById`
+  - `getCustomerOrders`
+  - `getAllProducts`
 
 ## Running Queries in Postman
 
