@@ -6,12 +6,15 @@ const errorHandler = require("./src/middewares/errorHandler");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 const typeDefs = require("./src/graphql/typeDefs/index");
 const resolvers = require("./src/graphql/resolvers/index");
+const graphqlLogger = require("./src/middewares/logger");
 
 const app = express();
 connectDB();
 const schema = makeExecutableSchema({ typeDefs, resolvers });
+app.use(express.json()); 
 app.use(
   "/graphql",
+  graphqlLogger,
   graphqlHTTP({
     schema,
     graphiql: true,
