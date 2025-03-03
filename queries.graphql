@@ -29,6 +29,23 @@ query GetSalesAnalytics {
   }
 }
 
+# 📌 Fetch all Order pagination (optional : filter by customerId )
+
+query GetCustomerOrders {
+  getCustomerOrders(limit: 6) {
+    orders {
+      _id
+      customerId
+      totalAmount
+      orderDate
+      status
+    }
+    totalOrders
+    totalPages
+    currentPage
+  }
+}
+
 # 📌 Fetch all customers
 query GetAllCustomers {
   getAllCustomers {
