@@ -14,6 +14,12 @@ const orderTypeDefs = gql`
     orderDate: String!
     status: String!
   }
+  type CustomerOrdersWithPagination {
+    orders: [Order]
+    totalOrders: Int
+    totalPages:Int
+    currentPage:Int
+  }
 
   type CategoryBreakUp {
     category: String!
@@ -44,6 +50,11 @@ const orderTypeDefs = gql`
     getAllOrders: [Order]
     getOrderById(_id: ID!): Order
     getSalesAnalytics(startDate: String!, endDate: String!): SalesAnalytics
+    getCustomerOrders(
+      customerId: ID
+      page: Int
+      limit: Int
+    ): CustomerOrdersWithPagination
   }
 `;
 
