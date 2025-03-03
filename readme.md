@@ -24,6 +24,17 @@ This project is a GraphQL API for an e-commerce platform to analyze revenue, cus
    ```sh
    npm start
    ```
+
+## Redis Setup
+
+- ✅ **Set up Redis locally and run Redis on port `6379`**  
+- ✅ **Handled errors gracefully even if Redis is down**  
+
+## Branches
+
+- 🔀 **`main-without-redis`** – Branch without Redis caching  
+- 🔀 **`main-with-redis`** – Branch with Redis caching same as **`main`**
+
 ## Bonus Tasks
 
 - ✅ **Optimized MongoDB Aggregation Queries**
