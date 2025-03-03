@@ -1,0 +1,136 @@
+# 📌 Get Top Selling Products with limit of products
+query GetTopSellingProducts {
+  getTopSellingProducts(limit: 5) {
+    productId
+    totalSold
+    name
+  }
+}
+
+# 📌 Fetch customer spending analytics
+query GetCustomerSpending {
+  getCustomerSpending(customerId: "7895595e-7f25-47fe-a6f8-94b31bfab736") {
+    customerId
+    totalSpent
+    averageOrderValue
+    lastOrderDate
+  }
+}
+
+# 📌 Fetch sales analytics for a date range
+query GetSalesAnalytics {
+  getSalesAnalytics(startDate: "01-12-2024", endDate: "15-02-2025") {
+    totalRevenue
+    completedOrders
+    categoryBreakdown {
+      category
+      revenue
+    }
+  }
+}
+
+# 📌 Fetch all customers
+query GetAllCustomers {
+  getAllCustomers {
+    _id
+    name
+    email
+    age
+    location
+    gender
+  }
+}
+
+# 📌 Fetch a specific customer by ID
+query GetCustomerById {
+  getCustomerById(_id: "7895595e-7f25-47fe-a6f8-94b31bfab736") {
+    _id
+    name
+    email
+    location
+  }
+}
+
+# 📌 Fetch all products
+query GetAllProducts {
+  getAllProducts {
+    _id
+    name
+    category
+    price
+    stock
+  }
+}
+
+# 📌 Fetch all orders
+query GetAllOrders {
+  getAllOrders {
+    _id
+    customerId
+    totalAmount
+    orderDate
+    status
+    products {
+      productId
+      quantity
+      priceAtPurchase
+    }
+  }
+}
+
+# 📌 Fetch a specific order by ID
+query GetOrderById {
+  getOrderById(_id: "06a714db-57ec-4af4-bd23-6e01ae764f14") {
+    _id
+    customerId
+    totalAmount
+    orderDate
+    status
+    products {
+      productId
+      quantity
+      priceAtPurchase
+    }
+  }
+}
+
+# 📌 Mutation: Add a new customer
+mutation AddCustomer {
+  addCustomer(
+    name: "John Doe"
+    email: "john.doe@example.com"
+    age: 30
+    location: "New York"
+    gender: "Male"
+  ) {
+    _id
+    name
+    email
+  }
+}
+
+# 📌 Mutation: Add a new order
+mutation AddOrder {
+  addOrder(
+    customerId: "7895595e-7f25-47fe-a6f8-94b31bfab736"
+    products: [
+      {
+        productId: "34fad6ef-d906-44ce-ae7a-44453282b0e9"
+        quantity: 1
+        priceAtPurchase: 228.67
+      }
+      {
+        productId: "508220fc-2f77-414e-b9d6-120be0fca340"
+        quantity: 3
+        priceAtPurchase: 19.05
+      }
+    ]
+    totalAmount: 285.82
+    orderDate: "2024-12-08T10:35:58.471Z"
+    status: "pending"
+  ) {
+    _id
+    totalAmount
+    status
+  }
+}
