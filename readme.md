@@ -19,7 +19,7 @@ This project is a GraphQL API for an e-commerce platform to analyze revenue, cus
 
 3. **Set Up Environment Variables:**
    Download the `.env` file from the following link (unzip this file )and place it in your project root:
-   [Download .env file](https://drive.google.com/file/d/15opHZW8BgCL0cLIRM79OWqG8yBwcxaTx/view?usp=sharing)
+   [Download .env file](https://drive.google.com/file/d/1vCCZWgDlk_TBw_RpbDROLuNBRoEN4jS0/view?usp=sharing)
 
 4. **Run the Server:**
    ```sh
@@ -49,6 +49,7 @@ This project is a GraphQL API for an e-commerce platform to analyze revenue, cus
   - `getOrderById`
   - `getCustomerOrders`
   - `getAllProducts`
+- ✅ **Implemented `Logger` middleware**
 
 ## Running Queries in Postman
 
